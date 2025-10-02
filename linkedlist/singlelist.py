@@ -54,6 +54,7 @@ class SingleLinkedList:
             print(n.data, " --> ", end="")
             n = n.next
         print()
+        return
     
     def list_size(self):
         if not self.head:
@@ -65,6 +66,48 @@ class SingleLinkedList:
             count +=1
             temp = temp.next
         return count
+    
+    def update_list(self, data, index):
+        if not self.head:
+            self.head = Node(data)
+            return
+        count = 0
+        temp = self.head
+        while temp:
+            if count == index:
+                temp.data = data
+                return
+            count +=1
+            temp = temp.next
+        return
+    
+    def del_node(self, index):
+        if not self.head:
+            return
+        
+        if index == 0:
+            if not self.head.next:
+                self.head = None
+                return
+            self.head = self.head.next
+            return
+        
+        cur = self.head
+        pre = self.head
+        count = 0
+        while cur:
+            if count == index:
+                pre.next = cur.next
+                return
+            count +=1
+            pre = cur
+            cur = cur.next
+        return
+
+    def create_linkedlist_by_list(self, l):
+        for n in l:
+            self.insert_at_end(n)
+        return
         
 l = SingleLinkedList()
 print("List Size is ", l.list_size())
@@ -82,3 +125,9 @@ l.print_list()
 l.insert_at_index(555, 5)
 l.print_list()
 print("List Size is ", l.list_size())
+l.update_list(2000, 0)
+l.print_list()
+l.del_node(0)
+l.print_list()
+l.create_linkedlist_by_list(["vamsi", "krishna", "nagidi", "nagarjuna", "rajinu", "rani", "nagesh", "niranjan", "sukumar", "chandu", "venkeyyy", "minni"])
+l.print_list()
